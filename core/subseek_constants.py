@@ -47,6 +47,7 @@ SPECIAL_WORDS = [
                 'www.usabit.com',
                 'yify',
                 'hdtv',
+                'lol',
                 'asap',
                 'saints',
                 'vlis',
