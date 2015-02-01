@@ -1,5 +1,5 @@
 # Subseek
-Search subtitles on the net for your movies and series using Python
+Search subtitles for all your movies and series with a single command line script
 
 ## Usage
 ```
@@ -15,6 +15,7 @@ Usage: python console.py -p (path) [option]
 
 ## Requirements
 ```
+Python 2.0
 rarfile-2.5
 rarosx-4.2.0 (on OSX or similar)
 ```
