@@ -1,5 +1,5 @@
 # SubSeek
-Find subtitles for your movies and series over the internet using Python
+Search subtitles on the net for your movies and series using Python
 
 ## Usage
 ```
