@@ -1,4 +1,4 @@
-# SubSeek
+# Subseek
 Search subtitles on the net for your movies and series using Python
 
 ## Usage
