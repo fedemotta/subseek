@@ -58,12 +58,20 @@ class Subseek():
         """
         # check that the COMPLETE word is there
         text = ' ' + text.lower() + ' '
+        
+        # Replacing double spaces and other chars with single space
+        text = re.sub('[^\w ]', ' ', text)
+        text = text.replace('_', ' ')
+        text = text.replace('-', ' ')
+        text = text.replace('    ', ' ')
+        text = text.replace('   ', ' ')
+        text = text.replace('  ', ' ')
         if filter_special_words:
             for word in SPECIAL_WORDS:
                 text = text.replace(' ' + word + ' ', ' ')
-
-        text = re.sub('[^\w ]', ' ', text)
+        
         # Replacing double spaces and other chars with single space
+        text = re.sub('[^\w ]', ' ', text)
         text = text.replace('_', ' ')
         text = text.replace('-', ' ')
         text = text.replace('    ', ' ')
