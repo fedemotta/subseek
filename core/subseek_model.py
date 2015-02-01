@@ -9,6 +9,7 @@ import zipfile
 from HTMLParser import HTMLParser
 
 from subseek_constants import SUBTITLE_EXTENSION
+from subseek_constants import SUBTITLE_LANGUAGE_FILTERS, SUBTITLE_LANGUAGE
 from subseek_constants import SEASON_IN_VIDEO
 from subseek_constants import EPISODE_IN_VIDEO
 from subseek_constants import SEASON_IN_VIDEO_WITH_ZERO
@@ -238,6 +239,15 @@ class Subseek():
                 typefile = 'other'
         return uncompressed_file, typefile
 
+    def other_language_sub(self, filename):
+        """
+        Check if this is another language sub
+        """
+        for lang, text in SUBTITLE_LANGUAGE_FILTERS.iteritems():
+            if SUBTITLE_LANGUAGE != lang and not filename.find(text) == -1:
+                return True
+        return False
+
     def get_sub_file_from_file(self, filename, search, force):
         """
         Find the best subtitle file from a compressed file
@@ -254,20 +264,21 @@ class Subseek():
             for best_file in files:
                 # check valid extension and already existent file
                 if not good and self.match_extension(best_file["text"],
-                '.' + SUBTITLE_EXTENSION) == True and (not os.path.isfile(
-                filename[:-4] + '.' + SUBTITLE_EXTENSION) or force == 1):
+                    '.' + SUBTITLE_EXTENSION) == True and (not os.path.isfile(
+                    filename[:-4] + '.' + SUBTITLE_EXTENSION) or force == 1
+                    ) and not self.other_language_sub(best_file["text"]):
+                        try:
+                            self.write_sub_file(uncompressed_file.read(
+                                                best_file["real_file"]),
+                                                filename)
+                            # keep only the subtitle file
+                            os.remove(filename)
+                            # break at first good subtitle
+                            return typefile
 
-                    try:
-                        self.write_sub_file(uncompressed_file.read(
-                                            best_file["real_file"]), filename)
-                        # keep only the subtitle file
-                        os.remove(filename)
-                        # break at first good subtitle
-                        return typefile
-
-                    except:
-                        # keep iterating until a good file is found
-                        good = False
+                        except:
+                            # keep iterating until a good file is found
+                            good = False
 
         # remove bad file
         os.remove(filename)

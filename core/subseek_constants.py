@@ -63,6 +63,13 @@ START_YEAR = 1900
 # resolutions
 RESOLUTIONS = ['480', '720', '1080']
 
+# Subtitles languages
+SUBTITLE_LANGUAGE = 'es'
+
+SUBTITLE_LANGUAGE_FILTERS = {'en': '[english',
+                             'es': '[espanol',
+                             'it': '[italiano'}
+
 # Dictionaries to search
 SUBTITLE_SEARCH_ENGINES = [
     {'name': 'www.subdivx.com',
