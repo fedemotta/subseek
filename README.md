@@ -5,10 +5,10 @@ Search subtitles for all your movies and series with a single command line scrip
 Subseek is a Python script which list all your local movies and series and search 
 subtitles for them. The web search is done using different subtitle providers 
 (currently Subdivx only) and different search engine providers (Google and DuckDuckGo).
-It uses the file and path name with an algorithm which made several changes to the
-text search to find the best match. You can search, in example, subtitles for a 
-complete TV show, a couple of movies and the last episode of your favorite TV series 
-in a single command line script.
+It uses the file and path name with an algorithm which made several changes to the searched 
+text to find the best match. You can search, in example, subtitles for all the seasons of 
+a complete TV show, a couple of movies and the last episode ofyour favorite TV show in a 
+single command line script.
 
 ## Usage
 ```
