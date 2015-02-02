@@ -30,12 +30,10 @@ def download_subtitle(search, results, filename, min_weight=0,
         ratingweight = s.text_weight(search, match_text)
         wordsweight = s.text_weight(search)
         if debug == 1:
-            print "Compare for download file: " + subtitleurl
-            print "                   Search: " + search
-            print "                    Match: " + match_text
-            print "               Max weight: " + str(wordsweight)
-            print "               Min weight: " + str(min_weight)
-            print "             Match weight: " + str(ratingweight)
+            print "        Subtitle File URL: " + subtitleurl
+            print "           Text To Search: " + search
+            print "            Text To Match: " + match_text
+            print "           Text Match (%): " + str(round(ratingweight/wordsweight*100,2)) + "%"
         # check minimal weight to use
         if ratingweight >= min_weight:
             downloaded = s.download(subtitleurl, filename + '.tmp')
