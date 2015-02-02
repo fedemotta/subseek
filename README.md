@@ -28,5 +28,5 @@ Usage: python console.py -p (path) [option]
 ```
 Python 2.0
 rarfile-2.5
-rarosx-4.2.0 (on OSX or similar)
+rarosx-4.2.0 (on OSX) or similar
 ```
