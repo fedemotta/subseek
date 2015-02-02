@@ -2,6 +2,7 @@
 import urllib2
 import os
 import re
+import math
 from datetime import datetime
 
 import rarfile
@@ -51,10 +52,10 @@ class Subseek():
                 if self.match_extension(one_file, '.' + extension) == True:
                     fileList.append(os.path.join(root, one_file))
         return fileList
-
-    def clean_text(self, text, filter_special_words=False):
+    
+    def one_space(self,text):
         """
-        Remove everything except alphanumeric, spaces and words from list
+        Remove duplicate spaces and non alphanumeric chars
         """
         # check that the COMPLETE word is there
         text = ' ' + text.lower() + ' '
@@ -66,17 +67,19 @@ class Subseek():
         text = text.replace('    ', ' ')
         text = text.replace('   ', ' ')
         text = text.replace('  ', ' ')
+        return text
+    
+    def clean_text(self, text, filter_special_words=False):
+        """
+        Remove everything except alphanumeric, spaces and words from list
+        """
+        text = self.one_space(text)
+        
         if filter_special_words:
             for word in SPECIAL_WORDS:
-                text = text.replace(' ' + word + ' ', ' ')
+                text = text.replace(self.one_space(word),' ')
         
-        # Replacing double spaces and other chars with single space
-        text = re.sub('[^\w ]', ' ', text)
-        text = text.replace('_', ' ')
-        text = text.replace('-', ' ')
-        text = text.replace('    ', ' ')
-        text = text.replace('   ', ' ')
-        text = text.replace('  ', ' ')
+        text = self.one_space(text)
         return text[1:len(text) - 1]
 
     def name_and_filename(self, name, filename):
@@ -197,7 +200,10 @@ class Subseek():
         url = self.get_search_url(subtitle_search_engine['url'],
                                   search, site)
         data = subtitle_search_engine['data']
-        html_links = self.get_html_links(url, data)
+
+        # Avoid duplicates
+        html_links = [dict(t) for t in set([tuple(d.items()) for d in self.get_html_links(url, data)])]
+
         # With deep=0 returns first match
         if deep==0:
             return [html_links[0]]
@@ -641,7 +647,8 @@ class Subseek():
                 pos = pos - 1
             weight = weight + (2 * n) ** (weightaux)
             n = n - 1
-        return weight
+        # Use log 10 for readability     
+        return math.log10(weight)
 
     def order_match(self, search, results):
         """
