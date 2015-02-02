@@ -17,7 +17,7 @@ def real_name(filename, path, rootpath=False, use_pieces=0):
     return Subseek().real_name(filename, path, rootpath, use_pieces)
 
 
-def download_subtitle(search, results, filename, min_weight=0,
+def download_subtitle(search, results, filename, min_match=0,
                       force=0, debug=0):
     """
     Download for real the best subtitle
@@ -27,15 +27,19 @@ def download_subtitle(search, results, filename, min_weight=0,
     for result in s.order_match(search, results):
         match_text = result['text'] + " " + result['description']
         subtitleurl = result['link']
-        ratingweight = s.text_weight(search, match_text)
-        wordsweight = s.text_weight(search)
+        rating_weight = s.text_weight(search, match_text)
+        max_weight = s.text_weight(search)
+        rating_match = rating_weight/max_weight*100
         if debug == 1:
-            print "        Subtitle File URL: " + subtitleurl
-            print "           Text To Search: " + search
-            print "            Text To Match: " + match_text
-            print "           Text Match (%): " + str(round(ratingweight/wordsweight*100,2)) + "%"
-        # check minimal weight to use
-        if ratingweight >= min_weight:
+            print """
+-------------------------------------------------------------------------------
+            """ 
+            print "Subtitle File URL: " + subtitleurl
+            print "   Text To Search: " + search
+            print "    Text To Match: " + match_text
+            print "   Text Match (%): " + str(round(rating_match,2)) + "%"
+        # check minimal match to use
+        if rating_match >= min_match:
             downloaded = s.download(subtitleurl, filename + '.tmp')
             if downloaded == False:
                 if debug == 1:
@@ -58,9 +62,13 @@ def download_subtitle(search, results, filename, min_weight=0,
                     break
         else:
             if debug == 1:
-                print "Error: match less than " + str(min_weight)
+                print "Error: match less than " + str(round(min_match,2))+ "%"
             subtitleurl = False
             break
+        print """
+-------------------------------------------------------------------------------
+        """ 
+
     return subtitleurl
 
 
@@ -114,7 +122,7 @@ def external_search_engines_links(search, deep=0, debug=0, links=[]):
 
 
 def download_best_subtitle(links, full_search, path_file_name,
-                           min_weight=0, force=0, debug=0):
+                           min_match=0, force=0, debug=0):
     """
     Download the best subtitle of a given list of links
     """
@@ -141,13 +149,13 @@ def download_best_subtitle(links, full_search, path_file_name,
         return download_subtitle(full_search,
                                  results,
                                  path_file_name,
-                                 min_weight,
+                                 min_match,
                                  force,
                                  debug)
 
 
 def best_subtitle_url(search, full_search, path_file_name,
-                      min_weight=0, force=0, deep=0, debug=0):
+                      min_match=0, force=0, deep=0, debug=0):
     """
     Get the best subtitle url
     """
@@ -156,13 +164,13 @@ def best_subtitle_url(search, full_search, path_file_name,
     subtitle_url = download_best_subtitle(links,
                                           full_search,
                                           path_file_name,
-                                          min_weight, force, debug)
+                                          min_match, force, debug)
     # if not found use the external search engines
     if not subtitle_url:
         links = external_search_engines_links(search, deep, debug)
         subtitle_url = download_best_subtitle(links,
                                               full_search,
                                               path_file_name,
-                                              min_weight, force, debug)
+                                              min_match, force, debug)
 
     return subtitle_url

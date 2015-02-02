@@ -10,15 +10,11 @@ def main(argv):
     # 1) @TODO: Generate the name using the path folder pieces. This is
     # working but we need to find a way to detect automatically when using
     # pieces or not.
-    # 2) @TODO: Avoid subtitle match with less than a minimal weight. This is
-    # working but needs more testing, and the value should be a smaller number
-    # like 1, 2, 5, etc. Maybe weight should work as %?
     # 3) @TODO: Words to add to the special words list.
     # 4) @TODO: Add deep search higher than 1 using pagination links
-    min_weigth = 0
-
+    
     # get options from parameters
-    rootpath, debug, force, use_pieces, deep = options(argv)
+    rootpath, debug, force, use_pieces, deep, min_match = options(argv)
     for extension in VIDEO_EXTENSIONS:
         for infile in get_files(rootpath, extension):
             # remove path and extension
@@ -53,7 +49,7 @@ def main(argv):
                 subtitle_url = best_subtitle_url(search,
                                                  full_search,
                                                  path + filename,
-                                                 min_weigth,
+                                                 min_match,
                                                  force,
                                                  deep,
                                                  debug)
