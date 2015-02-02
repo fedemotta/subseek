@@ -7,7 +7,7 @@ subtitles for them. The web search is done using different subtitle providers
 (currently Subdivx only) and different search engine providers (Google and DuckDuckGo).
 It uses the file and path name with an algorithm which made several changes to the searched 
 text to find the best match. You can search, in example, subtitles for all the seasons of 
-a complete TV show, a couple of movies and the last episode ofyour favorite TV show in a 
+a complete TV show, a couple of movies and the last episode of your favorite TV show in a 
 single command line script.
 
 ## Usage
