@@ -12,7 +12,7 @@ def main(argv):
     # pieces or not.
     # 2) @TODO: Avoid subtitle match with less than a minimal weight. This is
     # working but needs more testing, and the value should be a smaller number
-    # like 1, 2, 5, etc.
+    # like 1, 2, 5, etc. Maybe weight should work as %?
     # 3) @TODO: Words to add to the special words list.
     # 4) @TODO: Deep of the search (-d). Default is 0 and get first match. 1 or
     # more is the quantity of pages to iterate on each search.
@@ -31,7 +31,7 @@ def main(argv):
                       """
                 print 'Starting process for "' + path + filename + '"'
 
-            # do not search if already have subtitles and not force mode
+            # do not search if already have subtitles and is not in force mode
             # @TODO: Allow different subtitle types
             if force == 0 and os.path.isfile(path + filename + '.' +
                                              SUBTITLE_EXTENSION):
