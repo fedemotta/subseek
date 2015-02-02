@@ -14,8 +14,7 @@ def main(argv):
     # working but needs more testing, and the value should be a smaller number
     # like 1, 2, 5, etc. Maybe weight should work as %?
     # 3) @TODO: Words to add to the special words list.
-    # 4) @TODO: Deep of the search (-d). Default is 0 and get first match. 1 or
-    # more is the quantity of pages to iterate on each search.
+    # 4) @TODO: Add deep search higher than 1 using pagination links
     min_weigth = 0
 
     # get options from parameters
