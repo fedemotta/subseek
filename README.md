@@ -12,8 +12,10 @@ single command line script.
 
 ## Usage
 ```
-Usage        : python console.py -p (path) [option]
+python console.py -p (path) [option]
+
 Options and arguments:
+----------------------
 -p path      : Required. As string. Root path to start the process; 
                also --path=path. 
                Example: python console.py -p /home/username/Downloads/
