@@ -8,9 +8,11 @@ def usage():
     Options and arguments:
     -p path : Required. Root path to start the process; also --path=path.
     Example: python console.py -p /home/username/Downloads/
-    -f      : Force rewrite existing files; also --force
-    -v      : Verbose mode
-    -u      : Generate the name using the path folder pieces
+    -v      : Verbose mode; also --debug
+    -f      : Force rewrite existing subtitles files; also --force
+    -u      : Generate the name using the path folder pieces; also --use_pieces
+    -d deep : Deep search. 0 means get first match, 1 (or more) is the quantity 
+    of pages to iterate (maximum deep available is 1); also --deep=deep.
     -h      : Help; also --help
     """
 
@@ -21,9 +23,10 @@ def options(argv):
     debug = 0
     force = 0
     use_pieces = 0
+    deep = 0
     try:
-        opts, _ = getopt.getopt(argv, "hfup:v", ["help", "force", "use_pieces",
-                                                  "path="])
+        opts, _ = getopt.getopt(argv, "hfup:d:v", ["help", "force", "use_pieces",
+                                                   "path=", "deep=","debug"])
     except getopt.GetoptError:
         print usage()
         sys.exit(2)
@@ -31,7 +34,7 @@ def options(argv):
         if opt in ("-h", "--help"):
             print usage()
             sys.exit()
-        elif opt == '-v':
+        elif opt in ("-v","--debug"):
             debug = 1
         elif opt in ("-p", "--path"):
             rootpath = arg
@@ -39,10 +42,14 @@ def options(argv):
             force = 1
         elif opt in ("-u", "--use_pieces"):
             use_pieces = 1
+        elif opt in ("-d", "--deep"):
+            deep = int(arg)
+        
     if rootpath == False:
             print usage()
             sys.exit(2)
-    return [rootpath, debug, force, use_pieces]
+        
+    return [rootpath, debug, force, use_pieces, deep]
 
 
 def start(func):

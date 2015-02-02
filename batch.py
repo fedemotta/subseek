@@ -19,7 +19,7 @@ def main(argv):
     min_weigth = 0
 
     # get options from parameters
-    rootpath, debug, force, use_pieces = options(argv)
+    rootpath, debug, force, use_pieces, deep = options(argv)
     for extension in VIDEO_EXTENSIONS:
         for infile in get_files(rootpath, extension):
             # remove path and extension
@@ -56,6 +56,7 @@ def main(argv):
                                                  path + filename,
                                                  min_weigth,
                                                  force,
+                                                 deep,
                                                  debug)
                 if subtitle_url is False:
                     if debug == 1:

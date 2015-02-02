@@ -66,7 +66,7 @@ def download_subtitle(search, results, filename, min_weight=0,
     return subtitleurl
 
 
-def subtitle_search_engines_links(search, debug=0, links=[]):
+def subtitle_search_engines_links(search, deep=0, debug=0, links=[]):
     """
     Search the subtitle using subtitle search engines and
     get all the links from all
@@ -76,7 +76,7 @@ def subtitle_search_engines_links(search, debug=0, links=[]):
         if debug == 1:
             print "Searching '%s' in '%s'" % (search,
                                             subtitle_search_engine['name'])
-        links_aux = s.get_links(subtitle_search_engine, search)
+        links_aux = s.get_links(subtitle_search_engine, search, deep)
         if not links_aux or len(links_aux) == 0:
             if debug == 1:
                 print "No match found in '%s'" % subtitle_search_engine['name']
@@ -90,7 +90,7 @@ def subtitle_search_engines_links(search, debug=0, links=[]):
     return links
 
 
-def external_search_engines_links(search, debug=0, links=[]):
+def external_search_engines_links(search, deep=0, debug=0, links=[]):
     """
     Search the subtitle using external search engines and
     get all the links from all
@@ -101,7 +101,7 @@ def external_search_engines_links(search, debug=0, links=[]):
             if debug == 1:
                 print "Searching '%s' in '%s'" % (search,
                                                   search_engine['name'])
-            links_aux = s.get_links(search_engine, search,
+            links_aux = s.get_links(search_engine, search, deep,
                                     subtitle_search_engine["name"])
             if not links_aux or len(links_aux) == 0:
                 if debug == 1:
@@ -149,19 +149,19 @@ def download_best_subtitle(links, full_search, path_file_name,
 
 
 def best_subtitle_url(search, full_search, path_file_name,
-                      min_weight=0, force=0, debug=0):
+                      min_weight=0, force=0, deep=0, debug=0):
     """
     Get the best subtitle url
     """
     # first search in subtitle search engines
-    links = subtitle_search_engines_links(search, debug)
+    links = subtitle_search_engines_links(search, deep, debug)
     subtitle_url = download_best_subtitle(links,
                                           full_search,
                                           path_file_name,
                                           min_weight, force, debug)
     # if not found use the external search engines
     if not subtitle_url:
-        links = external_search_engines_links(search, debug)
+        links = external_search_engines_links(search, deep, debug)
         subtitle_url = download_best_subtitle(links,
                                               full_search,
                                               path_file_name,

@@ -190,7 +190,7 @@ class Subseek():
         url = url.replace('{{SEARCH}}', urllib2.quote(search))
         return url
 
-    def get_links(self, subtitle_search_engine, search, site=False):
+    def get_links(self, subtitle_search_engine, search, deep=0, site=False):
         """
         Get links from html
         """
@@ -198,8 +198,11 @@ class Subseek():
                                   search, site)
         data = subtitle_search_engine['data']
         html_links = self.get_html_links(url, data)
-
-        return html_links
+        # With deep=0 returns first match
+        if deep==0:
+            return [html_links[0]]
+        else:
+            return html_links
 
     def get_subtitles_links(self, link, subtitle_provider):
         """
