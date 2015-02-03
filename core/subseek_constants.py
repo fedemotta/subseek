@@ -15,9 +15,8 @@ EPISODE_IN_SUB_WITH_ZERO = [True]
 VIDEO_EXTENSIONS = ['avi', 'mp4', 'mkv', 'mpg', 'mpeg', 'flv']
 SUBTITLE_EXTENSION = 'srt'
 
-# Special words to filter in lower case, first words overrides last words,
+# Special words to filter, first words overrides last words,
 # because when there is a found the word is removed from the text,
-# @TODO: Order this list by word length before using it.
 SPECIAL_WORDS = [
                 'bdrip',
                 'cam',
@@ -56,6 +55,7 @@ SPECIAL_WORDS = [
                 'ts',
                 's4a',
                 'juggs',
+                'ETRG',
                 ]
 
 # starting year
