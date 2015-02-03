@@ -25,14 +25,15 @@ def download_subtitle(search, results, filename, min_match=0,
     s = Subseek()
     subtitleurl = False
     for result in s.order_match(search, results):
-        match_text = s.remove_punctuation(result['text']) + " " + s.remove_punctuation(result['description'])
+        match_text = s.clean_text(result['text'],False, 
+                    s.detect_encoding(result['text'])
+                    ) + " " + s.clean_text(result['description'],False, 
+                    s.detect_encoding(result['description']))
         subtitleurl = result['link']
         rating_weight = s.text_weight(search, match_text)
         max_weight = s.text_weight(search)
         rating_match = rating_weight/max_weight*100
         if debug == 1:
-            print """
-            """ 
             print "Subtitle File URL: " + subtitleurl
             print "   Text To Search: " + search
             print "    Text To Match: " + match_text
@@ -64,8 +65,6 @@ def download_subtitle(search, results, filename, min_match=0,
                 print "Error: match less than " + str(round(min_match,2))+ "%"
             subtitleurl = False
             break
-        print """
-        """ 
 
     return subtitleurl
 

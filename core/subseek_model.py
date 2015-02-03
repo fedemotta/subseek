@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 import urllib2
 import os
 import string
+import chardet
 import math
 from datetime import datetime
 
@@ -54,29 +54,34 @@ class Subseek():
                     fileList.append(os.path.join(root, one_file))
         return fileList
     
+    def detect_encoding(self, text):
+        """
+        Detect encoding of a given string
+        """
+        return  chardet.detect(text)['encoding']
+    
     def remove_punctuation(self,text):
         """
         Remove duplicate spaces and non alphanumeric chars
         """
-        # check that the COMPLETE word is there
-        text = ' ' + text.decode('utf-8',
-                                'ignore').lower().encode('utf-8','ignore') + ' '
-        
         # Replacing double spaces and other chars with single space
-        text = text.translate(string.maketrans(string.punctuation, ' '*len(string.punctuation)))
+        text = text.translate(string.maketrans(string.punctuation, 
+                            ' '*len(string.punctuation)))
         return  " ".join(text.split())
-    
-    def clean_text(self, text, filter_special_words=False):
+   
+    def clean_text(self, text, filter_special_words=False, encoding='utf-8'):
         """
         Remove everything except alphanumeric, spaces and words from list
         """
+        # decode with the provided encoding and always encode as utf-8
+        text = text.decode(encoding,'ignore').lower().encode('utf-8','ignore')
         text = self.remove_punctuation(text)
         
         if filter_special_words:
             for word in SPECIAL_WORDS:
-                text = text.replace(self.remove_punctuation(word),' ')
-        
-        text = self.remove_punctuation(text)
+                text = ' '+text.replace(' '+ self.remove_punctuation(word.lower())+ ' ',' ')+ ' '
+            text = self.remove_punctuation(text)
+            
         return text
 
     def name_and_filename(self, name, filename):
@@ -158,7 +163,6 @@ class Subseek():
             name_no_filter = self.clean_text(self.clean_name(name, filename,
                                                              False), False)
 
-        print name
         seasonepisode = self.season_episode(name)
         # return search, season episode and search match
         if seasonepisode == False:
@@ -238,7 +242,7 @@ class Subseek():
                      "description": "",
                      "real_file": file_from_list
                      })
-        return self.order_match(search, sub_list)
+        return self.order_match(search, sub_list, False)
 
     def decompress_file(self, filename):
         """
@@ -650,10 +654,15 @@ class Subseek():
         # Use log 10 for readability     
         return math.log10(weight)
 
-    def order_match(self, search, results):
+    def order_match(self, search, results, clean=True):
         """
         Return the list of results ordered by weight
         """
         return sorted(results, key=lambda t: (self.text_weight(search,
-                    self.remove_punctuation(t['text']) + " " +
-                    self.remove_punctuation(t['description']))), reverse=True)
+                            self.clean_text(t['text'], False, 
+                            self.detect_encoding(t['text'])
+                            ) if clean else t['text']  + " " +
+                            self.clean_text(t['description'], False, 
+                            s.detect_encoding(t['description'])
+                            ) if clean else t['description'])), 
+                            reverse=True)
