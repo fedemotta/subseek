@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import urllib2
 import os
-import re
+import string
 import math
 from datetime import datetime
 
@@ -53,34 +54,30 @@ class Subseek():
                     fileList.append(os.path.join(root, one_file))
         return fileList
     
-    def one_space(self,text):
+    def remove_punctuation(self,text):
         """
         Remove duplicate spaces and non alphanumeric chars
         """
         # check that the COMPLETE word is there
-        text = ' ' + text.lower() + ' '
+        text = ' ' + text.decode('utf-8',
+                                'ignore').lower().encode('utf-8','ignore') + ' '
         
         # Replacing double spaces and other chars with single space
-        text = re.sub('[^\w ]', ' ', text)
-        text = text.replace('_', ' ')
-        text = text.replace('-', ' ')
-        text = text.replace('    ', ' ')
-        text = text.replace('   ', ' ')
-        text = text.replace('  ', ' ')
-        return text
+        text = text.translate(None, string.punctuation)
+        return  " ".join(text.split())
     
     def clean_text(self, text, filter_special_words=False):
         """
         Remove everything except alphanumeric, spaces and words from list
         """
-        text = self.one_space(text)
+        text = self.remove_punctuation(text)
         
         if filter_special_words:
             for word in SPECIAL_WORDS:
-                text = text.replace(self.one_space(word),' ')
+                text = text.replace(self.remove_punctuation(word),' ')
         
-        text = self.one_space(text)
-        return text[1:len(text) - 1]
+        text = self.remove_punctuation(text)
+        return text
 
     def name_and_filename(self, name, filename):
         """
@@ -202,10 +199,12 @@ class Subseek():
         data = subtitle_search_engine['data']
 
         # Avoid duplicates
-        html_links = [dict(t) for t in set([tuple(d.items()) for d in self.get_html_links(url, data)])]
+        html_links = self.get_html_links(url, data);
+        if html_links != False:
+            html_links = [dict(t) for t in set([tuple(d.items()) for d in html_links])]
 
         # With deep=0 returns first match
-        if deep==0:
+        if deep==0 and html_links != False and len(html_links)>0:
             return [html_links[0]]
         else:
             return html_links
@@ -655,4 +654,5 @@ class Subseek():
         Return the list of results ordered by weight
         """
         return sorted(results, key=lambda t: (self.text_weight(search,
-                    t['text'] + " " + t['description'])), reverse=True)
+                    self.remove_punctuation(t['text']) + " " +
+                    self.remove_punctuation(t['description']))), reverse=True)

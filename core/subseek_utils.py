@@ -25,14 +25,13 @@ def download_subtitle(search, results, filename, min_match=0,
     s = Subseek()
     subtitleurl = False
     for result in s.order_match(search, results):
-        match_text = result['text'] + " " + result['description']
+        match_text = s.remove_punctuation(result['text']) + " " + s.remove_punctuation(result['description'])
         subtitleurl = result['link']
         rating_weight = s.text_weight(search, match_text)
         max_weight = s.text_weight(search)
         rating_match = rating_weight/max_weight*100
         if debug == 1:
             print """
--------------------------------------------------------------------------------
             """ 
             print "Subtitle File URL: " + subtitleurl
             print "   Text To Search: " + search
@@ -66,7 +65,6 @@ def download_subtitle(search, results, filename, min_match=0,
             subtitleurl = False
             break
         print """
--------------------------------------------------------------------------------
         """ 
 
     return subtitleurl
