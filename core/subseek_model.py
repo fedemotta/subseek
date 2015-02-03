@@ -63,7 +63,7 @@ class Subseek():
                                 'ignore').lower().encode('utf-8','ignore') + ' '
         
         # Replacing double spaces and other chars with single space
-        text = text.translate(None, string.punctuation)
+        text = text.translate(string.maketrans(string.punctuation, ' '*len(string.punctuation)))
         return  " ".join(text.split())
     
     def clean_text(self, text, filter_special_words=False):
@@ -158,6 +158,7 @@ class Subseek():
             name_no_filter = self.clean_text(self.clean_name(name, filename,
                                                              False), False)
 
+        print name
         seasonepisode = self.season_episode(name)
         # return search, season episode and search match
         if seasonepisode == False:
