@@ -4,28 +4,28 @@ import getopt
 
 def usage():
     return  """
-    Usage:
-    ------
-    python console.py -p (path) [option]
-    
-    Options and arguments:
-    ----------------------
-    -p path      : String. Required. Root path to start the process; 
-                   also --path=path. 
-                   Example: python console.py -p /home/username/Downloads/
-    -v           : Verbose mode; also --debug
-    -f           : Force rewrite existing subtitles files; also --force
-    -u           : Generate the name using the path folder pieces; 
-                   also --use_pieces
-    -d deep      : Integer. Deep search. Default is 0 (means get first match), 
-                   1 (or more) is the quantity of pages to iterate (maximum 
-                   allowed value is 1); also --deep=deep
-    -m min_match : Float. Minimum match (%) to take into consideration. 
-                   Default is 0 (means any); also --min_match
-    -n           : Allow series detection in number format only (ie. Flash 101);
-                   also --number_format
-    -h           : Display help; also --help
-    """
+Usage:
+------
+python console.py -p (path) [option]
+
+Options and arguments:
+----------------------
+-p path      : String. Required. Root path to start the process; 
+               also --path=path. 
+               Example: python console.py -p /home/username/Downloads/
+-v           : Verbose mode; also --debug
+-f           : Force rewrite existing subtitles files; also --force
+-u           : Generate the name using the path folder pieces; 
+               also --use_pieces
+-d deep      : Integer. Deep search. Default is 0 (means get first match), 
+               1 (or more) is the quantity of pages to iterate (maximum 
+               allowed value is 1); also --deep=deep
+-m min_match : Float. Minimum match (%) to take into consideration. 
+               Default is 0 (means any); also --min_match
+-n           : Allow series detection in number format only (ie. Flash 101);
+               also --number_format
+-h           : Display help; also --help
+"""
 
 
 def options(argv):
