@@ -20,8 +20,8 @@ from subseek_constants import SEASON_IN_SUB
 from subseek_constants import EPISODE_IN_SUB
 from subseek_constants import SEASON_IN_SUB_WITH_ZERO
 from subseek_constants import EPISODE_IN_SUB_WITH_ZERO
-from subseek_constants import SPECIAL_WORDS
-from subseek_constants import START_YEAR, RESOLUTIONS
+from subseek_constants import START_YEAR
+from subseek_constants import RELEASE_GROUPS, RESOLUTIONS, CODECS, RELEASE_TYPES
 
 
 class MLStripper(HTMLParser):
@@ -78,8 +78,8 @@ class Subseek():
         text = self.remove_punctuation(text)
         
         if filter_special_words:
-            for word in SPECIAL_WORDS:
-                text = ' '+text.replace(' '+ self.remove_punctuation(word.lower())+ ' ',' ')+ ' '
+            for word in (RELEASE_GROUPS + RESOLUTIONS + CODECS + RELEASE_TYPES):
+                text = (' '+text+' ').replace(' '+ self.remove_punctuation(word.lower())+ ' ',' ')
             text = self.remove_punctuation(text)
             
         return text
@@ -109,7 +109,7 @@ class Subseek():
         """
         text = text.lower()
         founds = []
-        for word in SPECIAL_WORDS:
+        for word in (RELEASE_GROUPS + RESOLUTIONS + CODECS + RELEASE_TYPES):
             if text.find(' ' + word) > 0 or text.find('-' + word
              ) > 0 or text.find('_' + word) > 0 or text.find('.' + word) > 0:
                 founds.append(word)
@@ -123,7 +123,8 @@ class Subseek():
         words_text = ' '.join(words)
         return text + ' ' + words_text
 
-    def real_name(self, filename, path, rootpath=False, use_pieces=0):
+    def real_name(self, filename, path, rootpath=False, use_pieces=0, 
+                                                            number_format=0):
         """
         Get search string and season-episode string from filename
         """
@@ -163,7 +164,9 @@ class Subseek():
             name_no_filter = self.clean_text(self.clean_name(name, filename,
                                                              False), False)
 
-        seasonepisode = self.season_episode(name)
+        seasonepisode = self.season_episode(name, number_format)
+        print seasonepisode
+        
         # return search, season episode and search match
         if seasonepisode == False:
             return (self.fix_search(name), False,
@@ -319,27 +322,71 @@ class Subseek():
             return True
         except:
             return False
-
-    def has_year(self, text):
+    
+    def all_years(self):
+        """
+        Generates a year list
+        """
+        years = []
+        year = START_YEAR
+        while year <= datetime.now().year:
+            years += [str(year)]
+            year += 1
+        
+        return years
+  
+    def is_found(self, clean_text, search):
+        """
+        Find a search match a text
+        """
+        clean_search = ' '+self.clean_text(search)+' '
+        if (' '+clean_text+' ').find(clean_search) != -1:
+            return True
+        else:
+            return False
+    
+    def get_founds(self,text, list):
+        """
+        Returns a list of found
+        """
+        clean_text = self.clean_text(text)
+        founds = []
+        for search in list:
+            if (self.is_found(clean_text, search)):
+                founds += [search]
+                
+        return founds
+    
+    def get_years(self, text):
         """
         Find if the text has a year
         """
-        end_year = datetime.now().year
+        return self.get_founds(text, self.all_years())
+  
+    def get_release_groups(self, text):
+        """
+        Find if the text has a release group
+        """
+        return self.get_founds(text, RELEASE_GROUPS)
 
-        while START_YEAR <= end_year:
-            if text.find(str(end_year)) != -1:
-                return True
-            end_year -= 1
-        return False
-
-    def has_resolution(self, text):
+    def get_resolutions(self, text):
         """
         Find if the text has a resolution
         """
-        for resolution in RESOLUTIONS:
-            if text.find(resolution) != -1:
-                return True
-        return False
+        return self.get_founds(text, RESOLUTIONS)
+    
+    def get_codecs(self, text):
+        """
+        Find if the text has a codec
+        """
+        return self.get_founds(text, CODECS)
+    
+    def get_release_types(self, text):
+        """
+        Find if the text has a release type
+        """
+        return self.get_founds(text, RELEASE_TYPES)
+
 
     def get_season_episode_text(self, season=1,
                                 episode=1,
@@ -367,8 +414,50 @@ class Subseek():
                 season_episode += '0'
             season_episode += str(episode)
             return season_episode
-
-    def get_season_episode_formatter(self, filename,
+    
+    def allow_season_episode_format(self, season_search, episode_search, 
+                                                                number_format):
+        """
+        Allow or not some season episode format
+        """
+        if season_search in [False, '', ' '] and episode_search in [False, 
+                                            '', ' '] and number_format == 0:
+            return False
+        return True
+                                                
+    def fix_season_episode_formatter(self, filename, season_search, 
+                                    episode_search, number_format=0):
+        """
+        Avoid year, resolution and x264 errors
+        """
+        # get special words found to use later
+        if season_search in [False, '', ' '] and ((episode_search in [False, 
+            '', ' '] and number_format == 1) or (episode_search == 'x')):
+            
+            special_words_founds = self.get_years(filename
+                    ) + self.get_release_groups(filename
+                    ) + self.get_resolutions(filename
+                    ) + self.get_codecs(filename
+                    ) + self.get_release_types(filename)
+            
+        # remove year and any number word from the filename with 101 format
+        if season_search in [False, '', ' '] and episode_search in [False, 
+                                            '', ' '] and number_format == 1:
+            for found in special_words_founds:
+                if found.isdigit():
+                    filename = (' '+filename+' ').replace(' '+found+' ', ' ')
+            
+            #remove numbers in search name
+                
+        # remove xNUMBER special word from the filename if x101 format
+        if season_search in [False, '', ' '] and episode_search == 'x':
+            for found in special_words_founds:
+                if found[0]=='x' and found[:0].isdigit():
+                    filename = (' '+filename+' ').replace(' '+found+' ', ' ')
+        
+        return " ".join(filename.split())
+    
+    def get_season_episode_formatter(self, filename, number_format=0,
                                     season_search='s',
                                     episode_search='e',
                                     season_search_with_zero=True,
@@ -380,8 +469,7 @@ class Subseek():
                                     season_start=1,
                                     episode_start=1,
                                     season_end=99,
-                                    episode_end=99,
-                                    only_numbers=False
+                                    episode_end=99
                                     ):
         """
         Format for season and episode in file name
@@ -389,19 +477,15 @@ class Subseek():
         # season and episode initial values
         season = season_start
         episode = episode_start
-
-        # disallow 101 format when year or resolution is in the filename
-        if season_search in [False, '', ' '
-                                ] and episode_search in [False, '', ' '
-                                                ] and only_numbers == False:
-            if self.has_year(filename) or self.has_resolution(filename):
-                return False
-
-        # disallow x01 format when x264 is in the filename to avoid errors
-        if season_search in [False, '', ' '] and episode_search == 'x':
-            if filename.find('x264') != -1:
-                return False
-
+        
+        if self.allow_season_episode_format(season_search, episode_search, 
+                                                    number_format) == False:
+            return False
+        
+        # remove special words which breaks the given formatter
+        filename = self.fix_season_episode_formatter(filename, season_search, 
+                                                  episode_search, number_format)
+        
         while filename.find(self.get_season_episode_text(season,
                                              episode,
                                              season_search,
@@ -430,11 +514,12 @@ class Subseek():
                                                     episode_result_with_zero)
                 }
 
-    def season_episode(self, filename):
+    def season_episode(self, filename, number_format):
         """
         Search for season episode in name
         """
-        seasonepisode = self.get_season_episode_formatter(filename)
+        seasonepisode = self.get_season_episode_formatter(filename, 
+                                                          number_format)
         # search with many different formats
         # @TODO: Find a better way to do this loop
         for season_search in SEASON_IN_VIDEO:
@@ -446,6 +531,7 @@ class Subseek():
                                 for season_result_with_zero in SEASON_IN_SUB_WITH_ZERO:
                                     for episode_result_with_zero in EPISODE_IN_SUB_WITH_ZERO:
                                         seasonepisode = self.get_season_episode_formatter(filename,
+                                                      number_format,
                                                       season_search,
                                                       episode_search,
                                                       season_search_with_zero,

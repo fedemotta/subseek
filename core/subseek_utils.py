@@ -10,11 +10,12 @@ def get_files(path, extension):
     return Subseek().get_files(path, extension)
 
 
-def real_name(filename, path, rootpath=False, use_pieces=0):
+def real_name(filename, path, rootpath, use_pieces, number_format):
     """
     Use real_name method
     """
-    return Subseek().real_name(filename, path, rootpath, use_pieces)
+    return Subseek().real_name(filename, path, rootpath, use_pieces, 
+                                number_format)
 
 
 def download_subtitle(search, results, filename, min_match=0,
