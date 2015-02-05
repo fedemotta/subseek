@@ -2,7 +2,7 @@
 # All combined season episodes tags here. '' and "False" should be last or
 # could be overrides
 SEASON_IN_VIDEO = ['s', '', False]
-EPISODE_IN_VIDEO = ['e', ' e', 'x', 'ep', 'episode ', ' ', '']
+EPISODE_IN_VIDEO = ['e', ' e', 'x','#', 'ep', 'episode ', ' ', '']
 SEASON_IN_VIDEO_WITH_ZERO = [False, True]
 EPISODE_IN_VIDEO_WITH_ZERO = [True, False]
 # Search in subtitle (the online search)
@@ -15,54 +15,145 @@ EPISODE_IN_SUB_WITH_ZERO = [True]
 VIDEO_EXTENSIONS = ['avi', 'mp4', 'mkv', 'mpg', 'mpeg', 'flv']
 SUBTITLE_EXTENSION = 'srt'
 
-# Special words to filter, first words overrides last words,
-# because when there is a found the word is removed from the text,
-SPECIAL_WORDS = [
-                'bdrip',
-                'cam',
-                'dvdrip',
-                'dvdscr',
-                'hdrip',
-                'r6',
-                'r5',
-                'rc',
-                'scr',
-                'telecine',
-                'telesync',
-                'workprint',
-                'xvid',
-                'reencx264-bob',
-                'x264',
-                'hdrip',
-                '720p',
-                '1080p',
-                '480p',
-                'ac3',
-                'web-dl',
-                'dvd-rip',
-                'bluray',
-                'www.torrenting.com',
-                'brrip',
-                'www.usabit.com',
-                'yify',
-                'hdtv',
-                'lol',
-                'asap',
-                'saints',
-                'vlis',
-                'evolve',
-                'bito',
-                'ts',
-                's4a',
-                'juggs',
-                'ETRG',
-                ]
-
 # starting year
 START_YEAR = 1900
 
+# release groups
+RELEASE_GROUPS = [
+        'BOB',
+        'AC3',
+        'www.torrenting.com',
+        'www.usabit.com',
+        'YIFY',
+        'LOL',
+        'ASAP',
+        'SAINTS',
+        'VLIS',
+        'EVOLVE',
+        'BITO',
+        'S4A',
+        'JUGGS',
+        'ETRG',
+        'RARBG',
+        '2HD',
+        'AAC',
+    ]
+
 # resolutions
-RESOLUTIONS = ['480', '720', '1080']
+RESOLUTIONS = [
+        'SVCD',
+        '480',
+        '480i',
+        '480p',
+        '576',
+        '576i',
+        '576p',
+        'DVD',
+        '720', 
+        '720p',
+        '1080',
+        '1080p',
+        '1080i',
+        '2160',
+        '2160p',
+        '4320',
+        '4320p'
+]
+
+# codecs
+CODECS = [
+        'mp3',
+        'mp4',
+        'x265',
+        'REENCx264',
+        'x264',
+        'DivX',
+        'Xvid',
+        'FFmpeg',
+        '3ivx',
+        'x262',
+        'WMV',
+        'VP6', 
+        'VP6-E',
+        'VP6-S',
+        'VP7',
+        'VP8',
+        'VP9',
+        'libtheora',
+]
+            
+# release types
+RELEASE_TYPES = [
+        'CAMRip',
+        'CAM',
+        'TS',
+        'TELESYNC',
+        'PDVD',
+        'WP',
+        'WORKPRINT',
+        'TC',
+        'TELECINE',
+        'PPV',
+        'PPVRip',
+        'SCR',
+        'SCREENER',
+        'DVDSCR',
+        'DVDSCREENER',
+        'BDSCR',
+        'DDC',
+        'RC',
+        'R5',
+        'R5.LINE',
+        'R5.AC3.5.1.HQ',
+        'R0',
+        'R1',
+        'R2',
+        'R3',
+        'R4',
+        'R6',
+        'R7',
+        'R8',
+        'R9',
+        'DVDRip',
+        'DVDR', 
+        'DVD-Full',
+        'Full-Rip', 
+        'ISO rip', 
+        'lossless rip',
+        'untouched rip', 
+        'DVD-5',
+        'DVD-9',
+        'DSR',
+        'DSRip',
+        'DTHRip',
+        'DVBRip',
+        'HDTV',
+        'PDTV',
+        'TVRip',
+        'HDTVRip',
+        'HDRip',
+        'VODRip',
+        'VODR',
+        'WEBDL',
+        'WEB DL',
+        'WEB-DL',
+        'WEB-Rip',
+        'WEBRIP',
+        'WEB Rip',
+        'WEB-Cap',
+        'WEBCAP',
+        'WEB Cap',
+        'BDRip',
+        'BRRip',
+        'Blu-Ray', 
+        'BluRay', 
+        'BLURAY',
+        'BDR',
+        'BD5',
+        'BD9', 
+        'BD25',
+        'BD50',
+]
 
 # Subtitles languages
 SUBTITLE_LANGUAGE = 'es'
