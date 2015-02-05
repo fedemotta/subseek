@@ -165,7 +165,6 @@ class Subseek():
                                                              False), False)
 
         seasonepisode = self.season_episode(name, number_format)
-        print seasonepisode
         
         # return search, season episode and search match
         if seasonepisode == False:
