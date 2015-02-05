@@ -14,7 +14,7 @@ def main(argv):
     # 4) @TODO: Add deep search higher than 1 using pagination links
     
     # get options from parameters
-    rootpath, debug, force, use_pieces, deep, min_match = options(argv)
+    rootpath,debug,force,use_pieces,deep,min_match,number_format = options(argv)
     for extension in VIDEO_EXTENSIONS:
         for infile in get_files(rootpath, extension):
             # remove path and extension
@@ -38,7 +38,8 @@ def main(argv):
                 search, season_episode, full_search = real_name(filename,
                                                                 path,
                                                                 rootpath,
-                                                                use_pieces)
+                                                                use_pieces,
+                                                                number_format)
                 if (season_episode == False):
                     if debug == 1:
                         print 'Not valid series name'
