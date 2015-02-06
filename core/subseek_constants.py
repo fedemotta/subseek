@@ -37,6 +37,9 @@ RELEASE_GROUPS = [
         'RARBG',
         '2HD',
         'AAC',
+        'mSD',
+        'REWARD',
+        'AMIABLE'
     ]
 
 # resolutions
