@@ -744,10 +744,10 @@ class Subseek():
         Return the list of results ordered by weight
         """
         return sorted(results, key=lambda t: (self.text_weight(search,
-                            self.clean_text(t['text'], False, 
+                            (self.clean_text(t['text'], False, 
                             self.detect_encoding(t['text'])
-                            ) if clean else t['text']  + " " +
-                            self.clean_text(t['description'], False, 
-                            s.detect_encoding(t['description'])
-                            ) if clean else t['description'])), 
+                            ) if clean else t['text'])  + " " +
+                            (self.clean_text(t['description'], False, 
+                            self.detect_encoding(t['description'])
+                            ) if clean else t['description']))), 
                             reverse=True)
