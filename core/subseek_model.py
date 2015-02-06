@@ -205,15 +205,16 @@ class Subseek():
                                   search, site)
         data = subtitle_search_engine['data']
 
-        # Avoid duplicates
         html_links = self.get_html_links(url, data);
-        if html_links != False:
-            html_links = [dict(t) for t in set([tuple(d.items()) for d in html_links])]
-
+        
         # With deep=0 returns first match
         if deep==0 and html_links != False and len(html_links)>0:
             return [html_links[0]]
         else:
+            # Avoid duplicates
+            if html_links != False:
+                html_links = [dict(t) for t in set([tuple(d.items()) for d in html_links])]
+
             return html_links
 
     def get_subtitles_links(self, link, subtitle_provider):
