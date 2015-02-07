@@ -39,7 +39,8 @@ RELEASE_GROUPS = [
         'AAC',
         'mSD',
         'REWARD',
-        'AMIABLE'
+        'AMIABLE',
+        'ENCODEKING'
     ]
 
 # resolutions
@@ -138,14 +139,11 @@ RELEASE_TYPES = [
         'VODRip',
         'VODR',
         'WEBDL',
-        'WEB DL',
         'WEB-DL',
         'WEB-Rip',
         'WEBRIP',
-        'WEB Rip',
         'WEB-Cap',
         'WEBCAP',
-        'WEB Cap',
         'BDRip',
         'BRRip',
         'Blu-Ray', 
