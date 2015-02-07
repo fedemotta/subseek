@@ -36,7 +36,7 @@ class MLStripper(HTMLParser):
         self.fed.append('&%s;' % name)
 
     def get_data(self):
-        return ''.join(self.fed)
+        return ' '.join(self.fed)
 
 
 class Subseek():
