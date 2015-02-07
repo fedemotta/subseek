@@ -107,13 +107,9 @@ class Subseek():
         """
         Get the filtered words from text
         """
-        text = text.lower()
-        founds = []
-        for word in (RELEASE_GROUPS + RESOLUTIONS + CODECS + RELEASE_TYPES):
-            if text.find(' ' + word) > 0 or text.find('-' + word
-             ) > 0 or text.find('_' + word) > 0 or text.find('.' + word) > 0:
-                founds.append(word)
-                text = text.replace(word, ' ')
+        founds = self.get_release_groups(text)+self.get_resolutions(
+                 text)+self.get_codecs(text)+ self.get_release_types(text)
+        
         return founds
 
     def set_filtered_words(self, text, words):
@@ -353,7 +349,7 @@ class Subseek():
         founds = []
         for search in list:
             if (self.is_found(clean_text, search)):
-                founds += [search]
+                founds += [self.clean_text(search)]
                 
         return founds
     
