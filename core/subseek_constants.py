@@ -40,7 +40,8 @@ RELEASE_GROUPS = [
         'mSD',
         'REWARD',
         'AMIABLE',
-        'ENCODEKING'
+        'ENCODEKING',
+        'KILLERS'
     ]
 
 # resolutions
