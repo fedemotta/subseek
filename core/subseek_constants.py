@@ -41,7 +41,8 @@ RELEASE_GROUPS = [
         'REWARD',
         'AMIABLE',
         'ENCODEKING',
-        'KILLERS'
+        'KILLERS',
+        'OZLEM'
     ]
 
 # resolutions
