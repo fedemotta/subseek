@@ -73,6 +73,8 @@ class Subseek():
         """
         Remove everything except alphanumeric, spaces and words from list
         """
+        if encoding == None:
+            encoding = 'utf-8'
         # decode with the provided encoding and always encode as utf-8
         text = text.decode(encoding,'ignore').lower().encode('utf-8','ignore')
         text = self.remove_punctuation(text)
