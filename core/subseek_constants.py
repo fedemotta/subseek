@@ -24,6 +24,8 @@ RELEASE_GROUPS = [
         'AC3',
         'www.torrenting.com',
         'www.usabit.com',
+        'www.pimp4003.net',
+        'Pimp4003',
         'YIFY',
         'LOL',
         'ASAP',
@@ -42,7 +44,8 @@ RELEASE_GROUPS = [
         'AMIABLE',
         'ENCODEKING',
         'KILLERS',
-        'OZLEM'
+        'OZLEM',
+        'EVO'
     ]
 
 # resolutions
@@ -86,6 +89,7 @@ CODECS = [
         'VP8',
         'VP9',
         'libtheora',
+        '6CH'
 ]
             
 # release types
