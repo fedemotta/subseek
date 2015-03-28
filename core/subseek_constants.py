@@ -220,9 +220,23 @@ SEARCH_ENGINES = [
     }]
 
 SUBTITLE_PROVIDERS = [
+    {'name': '2015-03 subdivx.com subtitle page',
+     'data':{
+        'start_all': '<div id="menu_detalle_buscador"',
+        'end_all': '<div id="pie">',
+        'start_one': '<div id="menu_titulo_buscador">',
+        'end_one': '<div id="contenedor_der">',
+        'start_link': '<h1><a class="link1" href="',
+        'end_link': '">Bajar subt',
+        'start_text': '<b>',
+        'end_text': '</b>',
+        'start_description': '<br><br><font size=4>',
+        'end_description': '</font><br>'
+        }
+    },
     {'name': 'New subdivx.com subtitle page',
      'data':{
-        'start_all': '<div id="menu_detalle_buscador">',
+        'start_all': '<div id="menu_detalle_buscador"',
         'end_all': '<div id="pie">',
         'start_one': '<div id="menu_titulo_buscador">',
         'end_one': '</a><br><br></div>',
