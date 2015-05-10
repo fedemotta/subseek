@@ -45,7 +45,8 @@ RELEASE_GROUPS = [
         'ENCODEKING',
         'KILLERS',
         'OZLEM',
-        'EVO'
+        'EVO',
+        'anoXmous'
     ]
 
 # resolutions
