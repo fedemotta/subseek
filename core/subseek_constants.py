@@ -175,11 +175,11 @@ SUBTITLE_SEARCH_ENGINES = [
     {'name': 'www.subdivx.com',
      'url': 'http://www.subdivx.com/index.php?accion=5&masdesc=&buscar={{SEARCH}}&oxdown=1',
      'data':{
-             'start_all': '<div id="menu_detalle_buscador">',
-             'end_all': '<div id="pie">',
-             'start_one': '<div id="menu_titulo_buscador">',
-             'end_one': '</div></div>',
-             'start_link': '<a class="titulo_menu_izq" href="',
+             'start_all': '<div id="contenedor_izq"',
+             'end_all': '<div id="contenedor_der"',
+             'start_one': '<div id="menu_detalle_buscador"',
+             'end_one': '<div id="buscador_detalle_sub_datos"',
+             'start_link': '<a class="titulo_menu_izq2" href="',
              'end_link': '">',
              'start_text': '">',
              'end_text': '</a>',
@@ -221,60 +221,31 @@ SEARCH_ENGINES = [
     }]
 
 SUBTITLE_PROVIDERS = [
-    {'name': '2015-03 subdivx.com subtitle page',
-     'data':{
-        'start_all': '<div id="menu_detalle_buscador"',
+    {
+    'name': '2015-09 subdivx.com subtitle page',
+    'data':{
+        'start_all': '<div id="contenedor_interno"',
         'end_all': '<div id="pie">',
-        'start_one': '<div id="menu_titulo_buscador">',
-        'end_one': '<div id="contenedor_der">',
-        'start_link': '<h1><a class="link1" href="',
-        'end_link': '">Bajar subt',
+        'start_one': '<div id="contenedor_izq"',
+        'end_one': '<div id="contenedor_der"',
+        'start_link': '<a rel="nofollow" class="detalle_link" href="',
+        'end_link': '"><b>Bajar</b></a>',
         'start_text': '<b>',
         'end_text': '</b>',
         'start_description': '<br><br><font size=4>',
         'end_description': '</font><br>'
-        }
-    },
-    {'name': 'New subdivx.com subtitle page',
-     'data':{
-        'start_all': '<div id="menu_detalle_buscador"',
-        'end_all': '<div id="pie">',
-        'start_one': '<div id="menu_titulo_buscador">',
-        'end_one': '</a><br><br></div>',
-        'start_link': '</b></a> - <a class="detalle_link" href="',
-        'end_link': '"><b>Bajar</b>',
-        'start_text': '">',
-        'end_text': '</div>',
-        'start_description': '<div id="detalle_datos">',
-        'end_description': '</div>'
-        }
-    },
-    {'name': 'Old subdivx.com subtitle page',
-      'data':{
-            'start_all': '<div id="menu_detalle_buscador">',
-            'end_all': '<div id="pie">',
-            'start_one': '<div id="menu_titulo_buscador">',
-            'end_one': '<div id="contenedor_der">',
-            'start_link': '<center><h1><a class="link1" href="',
-            'end_link': '">Bajar subt',
-            'start_text': '<b>',
-            'end_text': '</b>',
-            'start_description': '<div id="detalle_datos">',
-            'end_description': '</div>'
-            }
-     },
-     {'name': 'Old subdivx.com index page',
-      'data':{
-        'start_all': '<div id="menu_detalle_buscador">',
-        'end_all': '<div id="pie">',
-        'start_one': '<div id="menu_titulo_buscador">',
-        'end_one': '<img src="bajar_sub.gif" border="0"></a></div></div>',
-        'start_link': '<a rel="nofollow" target="new" href="',
-        'end_link': '"><img src="bajar_sub.gif" border="0"></a>',
-        'start_text': '">',
+        },
+    'force_download':{
+        'start_all': '<body',
+        'end_all': '</body>',
+        'start_one': 'Por favor utiliza el',
+        'end_one': '</a>',
+        'start_link': "<a href='",
+        'end_link': "'><u>link directo",
+        'start_text': 'Por favor utiliza el',
         'end_text': '</a>',
-        'start_description': '<div id="buscador_detalle_sub">',
-        'end_description': '</div><div id="buscador_detalle_sub_datos">'
+        'start_description': 'Por favor utiliza el',
+        'end_description': '</a>'
         }
-     },
-    ]
+    }
+]
