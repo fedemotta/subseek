@@ -40,23 +40,27 @@ def main(argv):
                                                                 rootpath,
                                                                 use_pieces,
                                                                 number_format)
-                if (season_episode == False):
+                if search == 'sample':
                     if debug == 1:
-                        print 'Not valid series name'
+                        print 'Not searching subtitle for sample file'
                 else:
-                    if debug == 1:
-                        print 'Valid series name'
+                    if (season_episode == False):
+                        if debug == 1:
+                            print 'Not valid series name'
+                    else:
+                        if debug == 1:
+                            print 'Valid series name'
 
-                subtitle_url = best_subtitle_url(search,
-                                                 full_search,
-                                                 path + filename,
-                                                 min_match,
-                                                 force,
-                                                 deep,
-                                                 debug)
-                if subtitle_url is False:
-                    if debug == 1:
-                        print "Best subtitle not found"
+                    subtitle_url = best_subtitle_url(search,
+                                                     full_search,
+                                                     path + filename,
+                                                     min_match,
+                                                     force,
+                                                     deep,
+                                                     debug)
+                    if subtitle_url is False:
+                        if debug == 1:
+                            print "Best subtitle not found"
 
             if debug == 1:
                 print 'Ending process for "' + path + filename + '"'
