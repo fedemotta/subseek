@@ -172,7 +172,7 @@ SUBTITLE_LANGUAGE_FILTERS = {'en': '[english',
 
 # Dictionaries to search
 SUBTITLE_SEARCH_ENGINES = [
-    {'name': 'www.subdivx.com',
+    {'name': 'subdivx.com',
      'url': 'http://www.subdivx.com/index.php?accion=5&masdesc=&buscar={{SEARCH}}&oxdown=1',
      'data':{
              'start_all': '<div id="contenedor_izq"',
@@ -189,40 +189,43 @@ SUBTITLE_SEARCH_ENGINES = [
         }]
 
 SEARCH_ENGINES = [
-     {'name': 'http://www.google.com',
-     'url': 'http://www.google.com/search?q={{SITE}}%20{{SEARCH}}&oq={{SITE}}%20{{SEARCH}}',
-     'data':{
-          'start_all': '<div id="ires">',
-          'end_all': '<div id="foot">',
-          'start_one':'<li class="g">',
-          'end_one':'</li>',
-          'start_link':'<a href="/url?q=',
-          'end_link':'&amp;sa=U&amp;ei=',
-          'start_text':'<a href="/url?q=',
-          'end_text':'</a>',
-          'start_description':'<span class="st">',
-          'end_description':'</span>',
-      }
-     },
-    {'name': 'http://www.duckduckgo.com',
-     'url': 'http://duckduckgo.com/html/?q={{SITE}}%20{{SEARCH}}',
-     'data':{
-          'start_all': '<div id="links_wrapper">',
-          'end_all': '<div class="results_links_more nav-link">',
-          'start_one': '<div class="links_main links_deep">',
-          'end_one': '</div> </div> </div>',
-          'start_link': '<a rel="nofollow" class="large" href="',
-          'end_link': '">',
-          'start_text': '">',
-          'end_text': '</a>',
-          'start_description': '<div class="snippet">',
-          'end_description': '</div>',
-      }
-    }]
+    {
+    'name': 'google.com',
+    'url': 'http://www.google.com/search?q={{SITE}}%20{{SEARCH}}&oq={{SITE}}%20{{SEARCH}}',
+    'data':{
+        'start_all': '<div id="ires">',
+        'end_all': '<div id="foot">',
+        'start_one':'<li class="g">',
+        'end_one':'</li>',
+        'start_link':'<a href="/url?q=',
+        'end_link':'&amp;sa=U&amp',
+        'start_text':'<a href="/url?q=',
+        'end_text':'</a>',
+        'start_description':'<span class="st">',
+        'end_description':'</span>',
+        }
+    },
+    {
+    'name': 'duckduckgo.com',
+    'url': 'http://duckduckgo.com/html/?q={{SITE}}%20{{SEARCH}}',
+    'data':{
+        'start_all': '<div id="links_wrapper">',
+        'end_all': '<div class="results_links_more nav-link">',
+        'start_one': '<div class="links_main links_deep">',
+        'end_one': '</div> </div> </div>',
+        'start_link': '<a rel="nofollow" class="large" href="',
+        'end_link': '">',
+        'start_text': '">',
+        'end_text': '</a>',
+        'start_description': '<div class="snippet">',
+        'end_description': '</div>',
+        }
+    }
+]
 
 SUBTITLE_PROVIDERS = [
     {
-    'name': '2015-09 subdivx.com subtitle page',
+    'name': 'www.subdivx.com subtitle page',
     'data':{
         'start_all': '<div id="contenedor_interno"',
         'end_all': '<div id="pie">',
@@ -247,5 +250,22 @@ SUBTITLE_PROVIDERS = [
         'start_description': 'Por favor utiliza el',
         'end_description': '</a>'
         }
+    },
+    {
+    'name': 'www.subdivx.com search page',
+    'url': 'http://www.subdivx.com/index.php?accion=5&masdesc=&buscar={{SEARCH}}&oxdown=1',
+    'data':{
+        'start_all': '<div id="contenedor_izq"',
+        'end_all': '<div id="contenedor_der"',
+        'start_one': '<div id="menu_detalle_buscador"',
+        'end_one': '<div id="buscador_detalle_sub_datos"',
+        'start_link': '<a class="titulo_menu_izq2" href="',
+        'end_link': '">',
+        'start_text': '">',
+        'end_text': '</a>',
+        'start_description': '<div id="buscador_detalle_sub">',
+        'end_description': '</div><div id="buscador_detalle_sub_datos">'
+        },
+    'force_download':False
     }
 ]
