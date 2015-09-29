@@ -12,7 +12,7 @@ single command line script.
 
 ## Usage
 ```
-python console.py -p (path) [option]
+python subseek -p (path) [option]
 
 Options and arguments:
 ----------------------
