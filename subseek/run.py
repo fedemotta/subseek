@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from console.options import options, start
+from options import options, start
 from core import (VIDEO_EXTENSIONS, SUBTITLE_EXTENSION, real_name,
                      best_subtitle_url, get_files)
 

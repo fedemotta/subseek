@@ -10,18 +10,18 @@ import rarfile
 import zipfile
 from HTMLParser import HTMLParser
 
-from subseek_constants import SUBTITLE_EXTENSION
-from subseek_constants import SUBTITLE_LANGUAGE_FILTERS, SUBTITLE_LANGUAGE
-from subseek_constants import SEASON_IN_VIDEO
-from subseek_constants import EPISODE_IN_VIDEO
-from subseek_constants import SEASON_IN_VIDEO_WITH_ZERO
-from subseek_constants import EPISODE_IN_VIDEO_WITH_ZERO
-from subseek_constants import SEASON_IN_SUB
-from subseek_constants import EPISODE_IN_SUB
-from subseek_constants import SEASON_IN_SUB_WITH_ZERO
-from subseek_constants import EPISODE_IN_SUB_WITH_ZERO
-from subseek_constants import START_YEAR
-from subseek_constants import RELEASE_GROUPS, RESOLUTIONS, CODECS, RELEASE_TYPES
+from constants import SUBTITLE_EXTENSION
+from constants import SUBTITLE_LANGUAGE_FILTERS, SUBTITLE_LANGUAGE
+from constants import SEASON_IN_VIDEO
+from constants import EPISODE_IN_VIDEO
+from constants import SEASON_IN_VIDEO_WITH_ZERO
+from constants import EPISODE_IN_VIDEO_WITH_ZERO
+from constants import SEASON_IN_SUB
+from constants import EPISODE_IN_SUB
+from constants import SEASON_IN_SUB_WITH_ZERO
+from constants import EPISODE_IN_SUB_WITH_ZERO
+from constants import START_YEAR
+from constants import RELEASE_GROUPS, RESOLUTIONS, CODECS, RELEASE_TYPES
 
 
 class MLStripper(HTMLParser):

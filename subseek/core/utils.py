@@ -1,6 +1,6 @@
-from subseek_constants import (SUBTITLE_SEARCH_ENGINES, SUBTITLE_PROVIDERS,
+from constants import (SUBTITLE_SEARCH_ENGINES, SUBTITLE_PROVIDERS,
                               SEARCH_ENGINES)
-from subseek_model import Subseek
+from models import Subseek
 
 
 def get_files(path, extension):
