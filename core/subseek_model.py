@@ -221,7 +221,9 @@ class Subseek():
         """
         url = link
         data = subtitle_provider['data']
-        html_links = self.get_html_links(url, data)
+        force_download = subtitle_provider['force_download']
+        html_links = self.get_html_links(url, data, False, True, force_download)
+        
         return html_links
 
     def write_sub_file(self, real_file, filename):
@@ -604,7 +606,7 @@ class Subseek():
         return s.get_data()
 
     def get_html_links(self, url, data, filter_site_url=False,
-                       clean_html=True):
+                       clean_html=True,force_download=False):
         """
         Search links using a dictionary data
         """
@@ -671,7 +673,15 @@ class Subseek():
                     endlink = datalink.find(data['end_link'])
 
                     if start > -1 and end > -1:
-                        link = urllib2.unquote(datalink[0:endlink])
+                        if force_download == False:
+                            link = urllib2.unquote(datalink[0:endlink])
+                        else:
+                            # force downlad url is the first result of another link
+                            link_force = self.get_html_links(datalink[0:endlink], force_download)
+                            if link_force==False:
+                                link = ''
+                            else:
+                                link = urllib2.unquote(link_force[0]['link'])
                         if link.find('http') == 0:
                             if clean_html:
                                 description = self.clean_html(description)
