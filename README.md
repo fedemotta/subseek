@@ -10,9 +10,15 @@ text to find the best match. You can search, in example, subtitles for all the s
 a complete TV show, a couple of movies and the last episode of your favorite TV show in a 
 single command line script.
 
+## Installation
+```
+pip install -r requirements.txt
+
+```
+
 ## Usage
 ```
-python subseek -p (path) [option]
+python -m subseek -p (path) [option]
 
 Options and arguments:
 ----------------------
@@ -35,7 +41,7 @@ Options and arguments:
 
 ## Requirements
 ```
-Python 2.0
-rarfile-2.5
+Python 2.7
+rarfile-2.6
 rarosx-4.2.0 (on OSX) or similar
 ```

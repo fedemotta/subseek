@@ -2,4 +2,8 @@
 setup.cfg
 setup.py
 subseek/__init__.py
+subseek/__main__.py
+subseek/constants.py
+subseek/models.py
 subseek/options.py
+subseek/utils.py
