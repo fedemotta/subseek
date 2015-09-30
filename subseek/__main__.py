@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os
 from options import options, start
-from core import (VIDEO_EXTENSIONS, SUBTITLE_EXTENSION, real_name,
-                     best_subtitle_url, get_files)
+from constants import (VIDEO_EXTENSIONS, SUBTITLE_EXTENSION)
+from utils import (real_name, best_subtitle_url, get_files)
 
 
 def main(argv):
