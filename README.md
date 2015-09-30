@@ -13,9 +13,14 @@ a complete TV show, a couple of movies and the last episode of your favorite TV 
 single command line script.
 
 ## Installation
+
+If you download this repository:
 ```
 pip install -r requirements.txt
-
+```
+Or without downloading this repository:
+```
+pip install subseek rarfile
 ```
 
 ## Usage
@@ -44,6 +49,6 @@ Options and arguments:
 ## Requirements
 ```
 Python 2.7
-rarfile-2.6
+rarfile-2.7
 rarosx-4.2.0 (on OSX) or similar
 ```
