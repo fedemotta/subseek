@@ -1,6 +1,8 @@
 # Subseek
 Search subtitles for all your movies and series with a single command line script
 
+[![PyPI version](https://badge.fury.io/py/subseek.svg)](http://badge.fury.io/py/subseek)
+
 ## Description
 Subseek is a Python script which list all your local movies and series and search 
 subtitles for them. The web search is done using different subtitle providers 
