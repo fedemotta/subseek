@@ -47,8 +47,8 @@ Options and arguments:
 ```
 
 ## Requirements
-```
-Python 2.7
-rarfile-2.7
-rarosx-4.2.0 (on OSX) or similar
-```
+
+- [python 2.7](https://wiki.python.org/moin/BeginnersGuide/Download)
+- [pip](https://pip.pypa.io/en/latest/installing/)
+- [rarfile-2.7](https://pypi.python.org/pypi/rarfile/)
+- rarfile depends on unrar command-line utility to do the actual decompression of rar files. Install [rarosx-4.2.0 on OSX](http://www.rarlab.com/rar/rarosx-4.2.0.tar.gz), [unrarsrc-5.3.3 on LINUX](http://www.rarlab.com/rar/unrarsrc-5.3.3.tar.gz) or [winrar unrar on WINDOWS](https://www.winrar.es/descargas/unrar)
