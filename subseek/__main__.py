@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from options import options, start
-from constants import (VIDEO_EXTENSIONS, SUBTITLE_EXTENSION)
+from constants import (VIDEO_EXTENSIONS, SUBTITLE_EXTENSION, BANNED_SEARCH)
 from utils import (real_name, best_subtitle_url, get_files)
 
 
@@ -40,9 +40,10 @@ def main(argv):
                                                                 rootpath,
                                                                 use_pieces,
                                                                 number_format)
-                if search == 'sample':
+                
+                if search in BANNED_SEARCH:
                     if debug == 1:
-                        print 'Not searching subtitle for sample file'
+                        print 'Not a valid search'
                 else:
                     if (season_episode == False):
                         if debug == 1:

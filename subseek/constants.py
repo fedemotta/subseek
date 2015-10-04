@@ -11,6 +11,9 @@ EPISODE_IN_SUB = ['e']
 SEASON_IN_SUB_WITH_ZERO = [True]
 EPISODE_IN_SUB_WITH_ZERO = [True]
 
+# Banned search
+BANNED_SEARCH = ['sample',' ','']
+
 # File extensions
 VIDEO_EXTENSIONS = ['avi', 'mp4', 'mkv', 'mpg', 'mpeg', 'flv']
 SUBTITLE_EXTENSION = 'srt'
