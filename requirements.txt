@@ -1,2 +1,0 @@
-rarfile==2.7
-subseek==2.0.6
