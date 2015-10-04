@@ -38,6 +38,8 @@ RELEASE_GROUPS = [
         'BITO',
         'S4A',
         'JUGGS',
+        'ETRG.com',
+        'RARBG.com',
         'ETRG',
         'RARBG',
         '2HD',
