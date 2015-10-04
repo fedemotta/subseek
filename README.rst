@@ -21,17 +21,9 @@ favorite TV show in a single command line script.
 Installation
 ------------
 
-If you download this repository:
-
 ::
 
-    pip install -r requirements.txt
-
-Or without downloading this repository:
-
-::
-
-    pip install subseek rarfile
+    pip install subseek
 
 Usage
 -----
