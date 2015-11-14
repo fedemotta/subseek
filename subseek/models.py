@@ -561,6 +561,8 @@ class Subseek():
             return 'zero hour'
         elif filename.find('marvels agents of s h i e l d') > -1:
             return 'agents of s.h.i.e.l.d'
+        elif filename.find('supergirl') > -1 and season != False:
+            return 'supergirl (2015)'
         # @TODO: Use dictionaries to remove Justice League hard coded values
         # for justice league complete series, this is a mess,
         # but was the main reason of the creation of this script, because
