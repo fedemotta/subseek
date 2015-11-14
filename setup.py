@@ -16,10 +16,10 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='2.1',
+    version='2.2',
 
     # Download Url
-    download_url = 'https://github.com/fedemotta/subseek/tarball/v2.1',
+    download_url = 'https://github.com/fedemotta/subseek/tarball/v2.2',
 
     description = 'Search subtitles for all your movies and series with a single command line script',
     long_description=long_description,
