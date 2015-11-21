@@ -177,22 +177,7 @@ SUBTITLE_LANGUAGE_FILTERS = {'en': '[english',
 
 # Dictionaries to search
 SUBTITLE_SEARCH_ENGINES = [
-    {'name': '2015/09/28 subdivx.com',
-     'url': 'http://www.subdivx.com/index.php?accion=5&masdesc=&buscar={{SEARCH}}&oxdown=1',
-     'data':{
-             'start_all': '<div id="contenedor_izq"',
-             'end_all': '<div id="contenedor_der"',
-             'start_one': '<div id="menu_detalle_buscador"',
-             'end_one': '<div id="buscador_detalle_sub_datos"',
-             'start_link': '<a class="titulo_menu_izq2" href="',
-             'end_link': '">',
-             'start_text': '">',
-             'end_text': '</a>',
-             'start_description': '<div id="buscador_detalle_sub">',
-             'end_description': '</div><div id="buscador_detalle_sub_datos">'
-         }
-    },
-    {'name': '2015/03/01 www.subdivx.com',
+    {'name': 'subdivx.com',
      'url': 'http://www.subdivx.com/index.php?accion=5&masdesc=&buscar={{SEARCH}}&oxdown=1',
      'data':{
              'start_all': '<div id="menu_detalle_buscador">',
@@ -246,7 +231,7 @@ SEARCH_ENGINES = [
 
 SUBTITLE_PROVIDERS = [
     {
-    'name': '2015/09/28 www.subdivx.com subtitle page',
+    'name': '2015/09/28 subdivx.com subtitle page',
     'data':{
         'start_all': '<div id="contenedor_interno"',
         'end_all': '<div id="pie">',
@@ -273,7 +258,7 @@ SUBTITLE_PROVIDERS = [
         }
     },
     {
-    'name': '2015/09/28 www.subdivx.com search page',
+    'name': '2015/09/28 subdivx.com search page',
     'data':{
         'start_all': '<div id="contenedor_izq"',
         'end_all': '<div id="contenedor_der"',
@@ -303,7 +288,7 @@ SUBTITLE_PROVIDERS = [
         },
     'force_download':False
     },
-    {'name': '2015/03/01 www.subdivx.com subtitle page',
+    {'name': '2015/03/01 subdivx.com subtitle page',
      'data':{
         'start_all': '<div id="menu_detalle_buscador"',
         'end_all': '<div id="pie">',
@@ -318,7 +303,7 @@ SUBTITLE_PROVIDERS = [
         },
     'force_download':False
     },
-    {'name': '2014/12/01 www.subdivx.com subtitle page',
+    {'name': '2014/12/01 subdivx.com subtitle page',
       'data':{
             'start_all': '<div id="menu_detalle_buscador">',
             'end_all': '<div id="pie">',
@@ -333,7 +318,7 @@ SUBTITLE_PROVIDERS = [
             },
     'force_download':False
     },
-    {'name': '2014/12/01 www.subdivx.com search page',
+    {'name': '2014/12/01 subdivx.com search page',
       'data':{
         'start_all': '<div id="menu_detalle_buscador">',
         'end_all': '<div id="pie">',
