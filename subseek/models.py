@@ -53,22 +53,22 @@ class Subseek():
                 if self.match_extension(one_file, '.' + extension) == True:
                     fileList.append(os.path.join(root, one_file))
         return fileList
-    
+
     def detect_encoding(self, text):
         """
         Detect encoding of a given string
         """
         return  chardet.detect(text)['encoding']
-    
+
     def remove_punctuation(self,text):
         """
         Remove duplicate spaces and non alphanumeric chars
         """
         # Replacing double spaces and other chars with single space
-        text = text.translate(string.maketrans(string.punctuation, 
+        text = text.translate(string.maketrans(string.punctuation,
                             ' '*len(string.punctuation)))
         return  " ".join(text.split())
-   
+
     def clean_text(self, text, filter_special_words=False, encoding='utf-8'):
         """
         Remove everything except alphanumeric, spaces and words from list
@@ -78,12 +78,10 @@ class Subseek():
         # decode with the provided encoding and always encode as utf-8
         text = text.decode(encoding,'ignore').lower().encode('utf-8','ignore')
         text = self.remove_punctuation(text)
-        
+
         if filter_special_words:
-            for word in (RELEASE_GROUPS + RESOLUTIONS + CODECS + RELEASE_TYPES):
-                text = (' '+text+' ').replace(' '+ self.remove_punctuation(word.lower())+ ' ',' ')
-            text = self.remove_punctuation(text)
-            
+            text = self.remove_punctuation(self.clean_after_word(text))
+
         return text
 
     def name_and_filename(self, name, filename):
@@ -111,7 +109,7 @@ class Subseek():
         """
         founds = self.get_release_groups(text)+self.get_resolutions(
                  text)+self.get_codecs(text)+ self.get_release_types(text)
-        
+
         return founds
 
     def set_filtered_words(self, text, words):
@@ -121,7 +119,7 @@ class Subseek():
         words_text = ' '.join(words)
         return text + ' ' + words_text
 
-    def real_name(self, filename, path, rootpath=False, use_pieces=0, 
+    def real_name(self, filename, path, rootpath=False, use_pieces=0,
                                                             number_format=0):
         """
         Get search string and season-episode string from filename
@@ -163,10 +161,10 @@ class Subseek():
                                                              False), False)
 
         seasonepisode = self.season_episode(name, number_format)
-        
+
         # return search, season episode and search match
         if seasonepisode == False:
-            return (self.fix_search(name), False,
+            return (self.clean_after_year(self.fix_search(name)), False,
                     self.fix_search(name_no_filter))
         else:
             return  (self.search_season_episode_name(name, seasonepisode),
@@ -204,7 +202,7 @@ class Subseek():
         data = subtitle_search_engine['data']
 
         html_links = self.get_html_links(url, data);
-        
+
         # With deep=0 returns first match
         if deep==0 and html_links != False and len(html_links)>0:
             return [html_links[0]]
@@ -223,7 +221,7 @@ class Subseek():
         data = subtitle_provider['data']
         force_download = subtitle_provider['force_download']
         html_links = self.get_html_links(url, data, False, True, force_download)
-        
+
         return html_links
 
     def write_sub_file(self, real_file, filename):
@@ -322,7 +320,7 @@ class Subseek():
             return True
         except:
             return False
-    
+
     def all_years(self):
         """
         Generates a year list
@@ -332,9 +330,9 @@ class Subseek():
         while year <= datetime.now().year:
             years += [str(year)]
             year += 1
-        
+
         return years
-  
+
     def is_found(self, clean_text, search):
         """
         Find a search match a text
@@ -344,7 +342,7 @@ class Subseek():
             return True
         else:
             return False
-    
+
     def get_founds(self,text, list):
         """
         Returns a list of found
@@ -354,15 +352,15 @@ class Subseek():
         for search in list:
             if (self.is_found(clean_text, search)):
                 founds += [self.clean_text(search)]
-                
+
         return founds
-    
+
     def get_years(self, text):
         """
         Find if the text has a year
         """
         return self.get_founds(text, self.all_years())
-  
+
     def get_release_groups(self, text):
         """
         Find if the text has a release group
@@ -374,13 +372,13 @@ class Subseek():
         Find if the text has a resolution
         """
         return self.get_founds(text, RESOLUTIONS)
-    
+
     def get_codecs(self, text):
         """
         Find if the text has a codec
         """
         return self.get_founds(text, CODECS)
-    
+
     def get_release_types(self, text):
         """
         Find if the text has a release type
@@ -414,49 +412,49 @@ class Subseek():
                 season_episode += '0'
             season_episode += str(episode)
             return season_episode
-    
-    def allow_season_episode_format(self, season_search, episode_search, 
+
+    def allow_season_episode_format(self, season_search, episode_search,
                                                                 number_format):
         """
         Allow or not some season episode format
         """
-        if season_search in [False, '', ' '] and episode_search in [False, 
+        if season_search in [False, '', ' '] and episode_search in [False,
                                             '', ' '] and number_format == 0:
             return False
         return True
-                                                
-    def fix_season_episode_formatter(self, filename, season_search, 
+
+    def fix_season_episode_formatter(self, filename, season_search,
                                     episode_search, number_format=0):
         """
         Avoid year, resolution and x264 errors
         """
         # get special words found to use later
-        if season_search in [False, '', ' '] and ((episode_search in [False, 
+        if season_search in [False, '', ' '] and ((episode_search in [False,
             '', ' '] and number_format == 1) or (episode_search == 'x')):
-            
+
             special_words_founds = self.get_years(filename
                     ) + self.get_release_groups(filename
                     ) + self.get_resolutions(filename
                     ) + self.get_codecs(filename
                     ) + self.get_release_types(filename)
-            
+
         # remove year and any number word from the filename with 101 format
-        if season_search in [False, '', ' '] and episode_search in [False, 
+        if season_search in [False, '', ' '] and episode_search in [False,
                                             '', ' '] and number_format == 1:
             for found in special_words_founds:
                 if found.isdigit():
                     filename = (' '+filename+' ').replace(' '+found+' ', ' ')
-            
+
             #remove numbers in search name
-                
+
         # remove xNUMBER special word from the filename if x101 format
         if season_search in [False, '', ' '] and episode_search == 'x':
             for found in special_words_founds:
                 if found[0]=='x' and found[:0].isdigit():
                     filename = (' '+filename+' ').replace(' '+found+' ', ' ')
-        
+
         return " ".join(filename.split())
-    
+
     def get_season_episode_formatter(self, filename, number_format=0,
                                     season_search='s',
                                     episode_search='e',
@@ -477,15 +475,15 @@ class Subseek():
         # season and episode initial values
         season = season_start
         episode = episode_start
-        
-        if self.allow_season_episode_format(season_search, episode_search, 
+
+        if self.allow_season_episode_format(season_search, episode_search,
                                                     number_format) == False:
             return False
-        
+
         # remove special words which breaks the given formatter
-        filename = self.fix_season_episode_formatter(filename, season_search, 
+        filename = self.fix_season_episode_formatter(filename, season_search,
                                                   episode_search, number_format)
-        
+
         while filename.find(self.get_season_episode_text(season,
                                              episode,
                                              season_search,
@@ -518,7 +516,7 @@ class Subseek():
         """
         Search for season episode in name
         """
-        seasonepisode = self.get_season_episode_formatter(filename, 
+        seasonepisode = self.get_season_episode_formatter(filename,
                                                           number_format)
         # search with many different formats
         # @TODO: Find a better way to do this loop
@@ -589,6 +587,25 @@ class Subseek():
                          filename[start:len(filename)]).replace('  ', ' ')
         else:
             return filename
+
+    def clean_after_year(self,filename):
+        """
+        Remove text after year
+        """
+        years = self.get_years(filename)
+        if (len(years)>0):
+            filename,year,_= filename.partition(years[len(years)-1])
+            filename = filename + year
+        return filename
+
+    def clean_after_word(self,filename):
+        """
+        Remove text after word without word
+        """
+        words = self.get_filtered_words(filename)
+        if (len(words)>0):
+            filename,_,_= filename.partition(words[0])
+        return filename
 
     def search_season_episode_name(self, filename, seasonepisode):
         """
@@ -747,7 +764,7 @@ class Subseek():
                 pos = pos - 1
             weight = weight + (2 * n) ** (weightaux)
             n = n - 1
-        # Use log 10 for readability     
+        # Use log 10 for readability
         return math.log10(weight)
 
     def order_match(self, search, results, clean=True):
@@ -755,10 +772,10 @@ class Subseek():
         Return the list of results ordered by weight
         """
         return sorted(results, key=lambda t: (self.text_weight(search,
-                            (self.clean_text(t['text'], False, 
+                            (self.clean_text(t['text'], False,
                             self.detect_encoding(t['text'])
                             ) if clean else t['text'])  + " " +
-                            (self.clean_text(t['description'], False, 
+                            (self.clean_text(t['description'], False,
                             self.detect_encoding(t['description'])
-                            ) if clean else t['description']))), 
+                            ) if clean else t['description']))),
                             reverse=True)

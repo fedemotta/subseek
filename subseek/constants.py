@@ -64,7 +64,7 @@ RESOLUTIONS = [
         '576i',
         '576p',
         'DVD',
-        '720', 
+        '720',
         '720p',
         '1080',
         '1080p',
@@ -88,7 +88,7 @@ CODECS = [
         '3ivx',
         'x262',
         'WMV',
-        'VP6', 
+        'VP6',
         'VP6-E',
         'VP6-S',
         'VP7',
@@ -97,7 +97,7 @@ CODECS = [
         'libtheora',
         '6CH'
 ]
-            
+
 # release types
 RELEASE_TYPES = [
         'CAMRip',
@@ -131,12 +131,12 @@ RELEASE_TYPES = [
         'R8',
         'R9',
         'DVDRip',
-        'DVDR', 
+        'DVDR',
         'DVD-Full',
-        'Full-Rip', 
-        'ISO rip', 
+        'Full-Rip',
+        'ISO rip',
         'lossless rip',
-        'untouched rip', 
+        'untouched rip',
         'DVD-5',
         'DVD-9',
         'DSR',
@@ -158,12 +158,12 @@ RELEASE_TYPES = [
         'WEBCAP',
         'BDRip',
         'BRRip',
-        'Blu-Ray', 
-        'BluRay', 
+        'Blu-Ray',
+        'BluRay',
         'BLURAY',
         'BDR',
         'BD5',
-        'BD9', 
+        'BD9',
         'BD25',
         'BD50',
 ]

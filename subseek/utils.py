@@ -14,7 +14,7 @@ def real_name(filename, path, rootpath, use_pieces, number_format):
     """
     Use real_name method
     """
-    return Subseek().real_name(filename, path, rootpath, use_pieces, 
+    return Subseek().real_name(filename, path, rootpath, use_pieces,
                                 number_format)
 
 
@@ -26,10 +26,10 @@ def download_subtitle(search, results, filename, min_match=0,
     s = Subseek()
     subtitleurl = False
     for result in s.order_match(search, results):
-        match_text = s.clean_text(result['text'],False, 
-                    s.detect_encoding(result['text'])
-                    ) + " " + s.clean_text(result['description'],False, 
-                    s.detect_encoding(result['description']))
+        match_text = s.clean_text(s.clean_html(result['text']),False,
+                    s.detect_encoding(s.clean_html(result['text']))
+                    ) + " " + s.clean_text(s.clean_html(result['description']),False,
+                    s.detect_encoding(s.clean_html(result['description'])))
         subtitleurl = result['link']
         rating_weight = s.text_weight(search, match_text)
         max_weight = s.text_weight(search)

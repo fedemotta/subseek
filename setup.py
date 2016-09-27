@@ -16,24 +16,24 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='2.4',
+    version='2.5',
 
     # Download Url
-    download_url = 'https://github.com/fedemotta/subseek/tarball/v2.4',
+    download_url = 'https://github.com/fedemotta/subseek/tarball/v2.5',
 
     description = 'Search subtitles for all your movies and series with a single command line script',
     long_description=long_description,
 
     # The project's main homepage.
     url = 'https://github.com/fedemotta/subseek',
-  
+
     # Author details
     author = 'Federico Nicolas Motta',
     author_email = 'fedemotta@gmail.com',
-  
+
     # Choose your license
     license='MIT',
-    
+
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         # How mature is this project? Common values are
