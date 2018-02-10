@@ -53,9 +53,9 @@ Usage
 Requirements
 ------------
 
--  `python 2.7 <https://wiki.python.org/moin/BeginnersGuide/Download>`__
+-  `python 2.7 or 3.0 <https://wiki.python.org/moin/BeginnersGuide/Download>`__
 -  `pip <https://pip.pypa.io/en/latest/installing/>`__
--  `rarfile-2.7 <https://pypi.python.org/pypi/rarfile/>`__
+-  `rarfile-2.7 or 3.0 <https://pypi.python.org/pypi/rarfile/>`__
 -  rarfile depends on unrar command-line utility to do the actual
    decompression of rar files. Install `rarosx-4.2.0 on
    OSX <http://www.rarlab.com/rar/rarosx-4.2.0.tar.gz>`__,
