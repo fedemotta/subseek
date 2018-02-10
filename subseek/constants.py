@@ -178,7 +178,7 @@ SUBTITLE_LANGUAGE_FILTERS = {'en': '[english',
 # Dictionaries to search
 SUBTITLE_SEARCH_ENGINES = [
     {'name': 'subdivx.com',
-     'url': 'http://anonymouse.org/cgi-bin/anon-www.cgi/http://www.subdivx.com/index.php?accion=5&masdesc=&buscar={{SEARCH}}&oxdown=1',
+     'url': 'http://www.subdivx.com/index.php?accion=5&masdesc=&buscar={{SEARCH}}&oxdown=1',
      'data':{
              'start_all': '<div id="menu_detalle_buscador">',
              'end_all': '<div id="pie">',
