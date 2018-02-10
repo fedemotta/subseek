@@ -253,7 +253,7 @@ class Subseek():
         try:
             uncompressed_file = rarfile.RarFile(filename)
             typefile = 'rar'
-        except rarfile.NotRarFile:
+        except rarfile.BadRarFile:
             try:
                 uncompressed_file = zipfile.ZipFile(filename)
                 typefile = 'zip'
